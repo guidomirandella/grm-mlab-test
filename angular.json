@@ -2,7 +2,187 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "",
-  "projects": {},
+  "projects": {
+    "bus-on-demand-trip": {
+      "root": "libs/bus-on-demand/trip",
+      "sourceRoot": "libs/bus-on-demand/trip/src",
+      "projectType": "library",
+      "prefix": "mlab-bus-on-demand-trip",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/bus-on-demand/trip/tsconfig.lib.json",
+              "libs/bus-on-demand/trip/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "libs/bus-on-demand/trip/jest.config.js",
+            "tsConfig": "libs/bus-on-demand/trip/tsconfig.spec.json",
+            "setupFile": "libs/bus-on-demand/trip/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/schematics:component": {
+          "styleext": "sass"
+        }
+      }
+    },
+    "test01": {
+      "root": "apps/test01/",
+      "sourceRoot": "apps/test01/src",
+      "projectType": "application",
+      "prefix": "grm-mlab-test",
+      "schematics": {
+        "@nrwl/schematics:component": {
+          "style": "sass"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/test01",
+            "index": "apps/test01/src/index.html",
+            "main": "apps/test01/src/main.ts",
+            "polyfills": "apps/test01/src/polyfills.ts",
+            "tsConfig": "apps/test01/tsconfig.app.json",
+            "assets": ["apps/test01/src/favicon.ico", "apps/test01/src/assets"],
+            "styles": [
+              "apps/test01/src/styles.scss",
+              "node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/test01/src/environments/environment.ts",
+                  "with": "apps/test01/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "test01:build",
+            "proxyConfig": "apps/test01/proxy.config.json"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "test01:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "test01:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/test01/tsconfig.app.json",
+              "apps/test01/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "apps/test01/jest.config.js",
+            "tsConfig": "apps/test01/tsconfig.spec.json",
+            "setupFile": "apps/test01/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "test01-e2e": {
+      "root": "apps/test01-e2e",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "apps/test01-e2e/protractor.conf.js",
+            "devServerTarget": "test01:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "test01:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "apps/test01-e2e/tsconfig.e2e.json",
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "ui": {
+      "root": "libs/ui",
+      "sourceRoot": "libs/ui/src",
+      "projectType": "library",
+      "prefix": "mlab-ui",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/ui/tsconfig.lib.json",
+              "libs/ui/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "libs/ui/jest.config.js",
+            "tsConfig": "libs/ui/tsconfig.spec.json",
+            "setupFile": "libs/ui/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/schematics:component": {
+          "styleext": "sass"
+        }
+      }
+    }
+  },
   "cli": {
     "warnings": {
       "typescriptMismatch": false,
@@ -18,5 +198,6 @@
     "@nrwl/schematics:library": {
       "style": "sass"
     }
-  }
+  },
+  "defaultProject": "bus-on-demand-trip"
 }

@@ -1,0 +1,17 @@
+{
+  "extends": "../../../tslint.json",
+  "rules": {
+    "directive-selector": [
+      true,
+      "attribute",
+      "mlab-bus-on-demand-trip",
+      "camelCase"
+    ],
+    "component-selector": [
+      true,
+      "element",
+      "mlab-bus-on-demand-trip",
+      "kebab-case"
+    ]
+  }
+}

@@ -7,5 +7,18 @@
     "tslint.json": "*",
     "nx.json": "*"
   },
-  "projects": {}
+  "projects": {
+    "bus-on-demand-trip": {
+      "tags": []
+    },
+    "test01": {
+      "tags": []
+    },
+    "test01-e2e": {
+      "tags": []
+    },
+    "ui": {
+      "tags": []
+    }
+  }
 }

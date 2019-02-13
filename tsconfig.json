@@ -12,7 +12,12 @@
     "typeRoots": ["node_modules/@types"],
     "lib": ["es2017", "dom"],
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@mlab/bus-on-demand/trip": [
+        "libs/bus-on-demand/trip/src/index.ts"
+      ],
+      "@mlab/ui": ["libs/ui/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

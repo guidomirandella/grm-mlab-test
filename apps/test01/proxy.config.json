@@ -1,0 +1,11 @@
+
+{
+  "/api": {
+    "target": "https://europe-west1-metropolis-fe-test.cloudfunctions.net/api",
+    "secure": false,
+    "pathRewrite": {
+      "^/api": ""
+    },
+    "changeOrigin": true
+  }
+}
