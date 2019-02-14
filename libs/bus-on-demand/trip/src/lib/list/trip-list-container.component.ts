@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import { TripsFacade } from '../+state/trips.facade';
+import { TripModel } from '../models/trip.model';
 
 
 @Component({
@@ -11,6 +12,10 @@ export class TripListContainerComponent {
 
   constructor(private tripsFacade: TripsFacade) {
     this.tripsFacade.loadAll();
+  }
+
+  selectTrip(trip: TripModel) {
+    this.tripsFacade.selectTrip(trip);
   }
 
 }

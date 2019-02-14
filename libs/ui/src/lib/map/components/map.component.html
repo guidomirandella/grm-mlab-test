@@ -1,1 +1,7 @@
-<agm-map fxFlexFill></agm-map>
+<agm-map fxFlexFill>
+  <agm-polyline *ngIf="_polylinePoints$">
+    <ng-container *ngFor="let polylinePoint of (_polylinePoints$ | async)">
+      <agm-polyline-point [latitude]="polylinePoint.latitude" [longitude]="polylinePoint.longitude"></agm-polyline-point>
+    </ng-container>
+  </agm-polyline>
+</agm-map>

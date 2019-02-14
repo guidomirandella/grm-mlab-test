@@ -33,9 +33,15 @@ const getSelectedTrips = createSelector(
   }
 );
 
+const getSelectedTrip = createSelector(
+  getTripsState,
+  (state: TripsState) => state.selectedTrip
+);
+
 export const tripsQuery = {
   getLoaded,
   getError,
   getAllTrips,
-  getSelectedTrips
+  getSelectedTrips,
+  getSelectedTrip,
 };

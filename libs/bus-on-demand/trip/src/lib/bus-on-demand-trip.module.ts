@@ -12,6 +12,7 @@ import { TripAvailabilityPageComponent } from './routing/pages/availability/trip
 import { TripListComponent } from './list/trip-list.component';
 import { TripListContainerComponent } from './list/trip-list-container.component';
 import { TripMapComponent } from './map/trip-map.component';
+import { TripMapContainerComponent } from './map/trip-map-container.component';
 import {
   TRIPS_FEATURE_KEY,
   initialState as tripsInitialState,
@@ -19,7 +20,6 @@ import {
 } from './+state/trips.reducer';
 import { TripsEffects } from './+state/trips.effects';
 import { TripsFacade } from './+state/trips.facade';
-
 
 
 @NgModule({
@@ -39,12 +39,14 @@ import { TripsFacade } from './+state/trips.facade';
     TripListComponent,
     TripListContainerComponent,
     TripMapComponent,
+    TripMapContainerComponent,
   ],
   exports: [
     TripAvailabilityPageComponent,
     TripListComponent,
     TripListContainerComponent,
     TripMapComponent,
+    TripMapContainerComponent,
   ],
   providers: [TripsFacade]
 })

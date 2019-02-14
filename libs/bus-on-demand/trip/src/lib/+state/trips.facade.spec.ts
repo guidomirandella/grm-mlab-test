@@ -14,10 +14,10 @@ import { tripsQuery } from './trips.selectors';
 import { LoadTrips, TripsLoaded } from './trips.actions';
 import {
   TripsState,
-  Entity,
   initialState,
   tripsReducer
 } from './trips.reducer';
+import { TripModel } from '../models/trip.model';
 
 interface TestSchema {
   trips: TripsState;
@@ -29,7 +29,7 @@ describe('TripsFacade', () => {
   let createTrips;
 
   beforeEach(() => {
-    createTrips = (id: string, name = ''): Entity => ({
+    createTrips = (id: string, name = ''): TripModel => ({
       id,
       name: name || `name-${id}`
     });

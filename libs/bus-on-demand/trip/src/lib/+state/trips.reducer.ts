@@ -7,6 +7,7 @@ export const TRIPS_FEATURE_KEY = 'trips';
 export interface TripsState {
   list: TripModel[]; // list of Trips; analogous to a sql normalized table
   selectedId?: string | number; // which Trips record has been selected
+  selectedTrip?: TripModel,
   loaded: boolean; // has the Trips list been loaded
   error?: any; // last none error (if any)
 }
@@ -30,6 +31,13 @@ export function tripsReducer(
         ...state,
         list: action.payload,
         loaded: true
+      };
+      break;
+    }
+    case TripsActionTypes.SelectTrip: {
+      state = {
+        ...state,
+        selectedTrip: action.payload,
       };
       break;
     }

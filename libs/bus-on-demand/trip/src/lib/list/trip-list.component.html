@@ -1,5 +1,5 @@
 <mat-list>
-  <mat-list-item *ngFor="let trip of (_trips$ | async)">
+  <mat-list-item *ngFor="let trip of (_trips$ | async)" (click)="selectTrip(trip)">
     <h4 mat-line>{{ trip.description }}</h4>
     <p mat-line> {{ trip.startTime | date:'short' }} - {{ trip.endTime | date:'short' }} </p>
   </mat-list-item>

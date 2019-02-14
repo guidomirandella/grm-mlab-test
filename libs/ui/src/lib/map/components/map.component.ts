@@ -1,5 +1,8 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { AgmMap } from '@agm/core';
+import { Component, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { AgmMap, MouseEvent } from '@agm/core';
+import { Observable } from 'rxjs';
+
+import { PolylinePointModel } from '../models/polyline-point.model';
 
 
 @Component({
@@ -9,6 +12,8 @@ import { AgmMap } from '@agm/core';
 export class MapComponent implements OnInit {
 
   @ViewChild(AgmMap) map: AgmMap;
+
+  _polylinePoints$: Observable<PolylinePointModel[]>;
 
   @Input()
   set latitude(latitude: number) {
@@ -26,6 +31,16 @@ export class MapComponent implements OnInit {
 
   get longitude(): number {
     return this.map.longitude;
+  }
+
+  @Input()
+  set polylinePoints(polylinePoints$: Observable<PolylinePointModel[]>) {
+    this._polylinePoints$ = polylinePoints$;
+  }
+
+  @Output()
+  get mapClick(): Observable<MouseEvent> {
+    return this.map.mapClick.asObservable();
   }
 
   ngOnInit() {
