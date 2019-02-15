@@ -33,8 +33,12 @@ export class TripMapComponent {
   set passengersStops(passengersStops$: Observable<PassengerStopModel[]>) {
     this.map.markers = passengersStops$.pipe(
       filter(passengersStops => !!passengersStops),
-      map(passengersStops => passengersStops.map(passengerStop => passengerStop.point)),
-      map(points => points.map(point => ({ point: { lat: point._latitude, lng: point._longitude } }))),
+      map(passengersStops => {
+        return passengersStops.map(passengerStop => ({
+          infoContent: `Passenger: ${passengerStop.userName}`,
+          point: { lat: passengerStop.point._latitude, lng: passengerStop.point._longitude }
+        }))
+      }),
     );
   }
 

@@ -49,6 +49,7 @@
     "jest-zone-patch": "0.0.10",
     "polyline-encoded": "0.0.8",
     "rxjs": "~6.3.3",
+    "ts-mockito": "^2.3.1",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {

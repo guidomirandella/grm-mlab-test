@@ -9,7 +9,7 @@
     <ng-container *ngFor="let marker of (_markers$ | async)">
       <agm-marker [latitude]="marker.point.lat" [longitude]="marker.point.lng" [label]="" [agmFitBounds]="true">
         <agm-info-window [disableAutoPan]="true" *ngIf="marker.infoContent">
-          Hi, this is the content of the <strong>info window</strong>
+          {{ marker.infoContent }}
         </agm-info-window>
       </agm-marker>
     </ng-container>
