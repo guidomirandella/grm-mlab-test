@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { TripsFacade } from '../+state/trips.facade';
+import { PassengerStopModel } from '../models/passenger-stop.model';
 
 
 @Component({
@@ -9,6 +11,11 @@ import { TripsFacade } from '../+state/trips.facade';
 })
 export class TripMapContainerComponent {
 
-  constructor(private tripsFacade: TripsFacade) {}
+  selectedTrip$ = this.tripsFacade.selectedTrip$;
+  passengersStops$: Observable<PassengerStopModel[]>;
+
+  constructor(private tripsFacade: TripsFacade) {
+    this.passengersStops$ = this.tripsFacade.passengersStops$;
+  }
 
 }

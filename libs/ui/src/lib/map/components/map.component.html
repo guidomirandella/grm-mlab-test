@@ -1,7 +1,17 @@
-<agm-map fxFlexFill>
-  <agm-polyline *ngIf="_polylinePoints$">
-    <ng-container *ngFor="let polylinePoint of (_polylinePoints$ | async)">
-      <agm-polyline-point [latitude]="polylinePoint.latitude" [longitude]="polylinePoint.longitude"></agm-polyline-point>
+<agm-map fxFlexFill [zoom]="3">
+  <agm-polyline *ngIf="_decodedPolyline$">
+    <ng-container *ngFor="let polyline of (_decodedPolyline$ | async)">
+      <agm-polyline-point [latitude]="polyline.lat" [longitude]="polyline.lng"></agm-polyline-point>
     </ng-container>
   </agm-polyline>
+
+  <ng-container *ngIf="_markers$">
+    <ng-container *ngFor="let marker of (_markers$ | async)">
+      <agm-marker [latitude]="marker.lat" [longitude]="marker.lng" [label]="">
+        <agm-info-window [disableAutoPan]="true">
+          Hi, this is the content of the <strong>info window</strong>
+        </agm-info-window>
+      </agm-marker>
+    </ng-container>
+  </ng-container>
 </agm-map>

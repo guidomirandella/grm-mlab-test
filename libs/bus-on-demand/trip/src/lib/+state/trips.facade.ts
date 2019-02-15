@@ -14,6 +14,7 @@ export class TripsFacade {
   allTrips$ = this.store.pipe(select(tripsQuery.getAllTrips));
   selectedTrips$ = this.store.pipe(select(tripsQuery.getSelectedTrips));
   selectedTrip$ = this.store.pipe(select(tripsQuery.getSelectedTrip));
+  passengersStops$ = this.store.pipe(select(tripsQuery.getAllPassengersStops));
 
   constructor(private store: Store<TripsPartialState>) {}
 

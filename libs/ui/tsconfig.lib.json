@@ -11,8 +11,9 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
-    "types": [],
-    "lib": ["dom", "es2018"]
+    "types": ["googlemaps"],
+    "lib": ["dom", "es2018"],
+    "allowSyntheticDefaultImports": true
   },
   "angularCompilerOptions": {
     "annotateForClosureCompiler": true,

@@ -1,0 +1,15 @@
+@import '~@angular/material/theming';
+
+.mat-list-base {
+  padding: 0;
+}
+
+mat-list-item :hover {
+  cursor: pointer;
+}
+
+@include mat-core();
+
+.mlab-selected-trip {
+  background-color: mat-color(mat-palette($mat-red));
+}

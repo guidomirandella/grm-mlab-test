@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { TRIPS_FEATURE_KEY, TripsState } from './trips.reducer';
+import { TRIPS_FEATURE_KEY, TripsState, PassengerStopState, passengerStopAdapter } from './trips.reducer';
 
 // Lookup the 'Trips' feature state managed by NgRx
 const getTripsState = createFeatureSelector<TripsState>(TRIPS_FEATURE_KEY);
@@ -20,10 +20,26 @@ const getAllTrips = createSelector(
     return isLoaded ? state.list : [];
   }
 );
+
+const { selectAll } = passengerStopAdapter.getSelectors();
+
+const getPassengerStops = createSelector(
+  getTripsState,
+  (state: TripsState) => {
+    return state.passengersStops;
+  }
+);
+
+export const getAllPassengersStops = createSelector(
+  getPassengerStops,
+  selectAll
+);
+
 const getSelectedId = createSelector(
   getTripsState,
   (state: TripsState) => state.selectedId
 );
+
 const getSelectedTrips = createSelector(
   getAllTrips,
   getSelectedId,
@@ -44,4 +60,6 @@ export const tripsQuery = {
   getAllTrips,
   getSelectedTrips,
   getSelectedTrip,
+  getPassengerStops,
+  getAllPassengersStops,
 };
