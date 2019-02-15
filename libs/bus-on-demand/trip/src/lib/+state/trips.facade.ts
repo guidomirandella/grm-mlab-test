@@ -12,7 +12,6 @@ export class TripsFacade {
 
   loaded$ = this.store.pipe(select(tripsQuery.getLoaded));
   allTrips$ = this.store.pipe(select(tripsQuery.getAllTrips));
-  selectedTrips$ = this.store.pipe(select(tripsQuery.getSelectedTrips));
   selectedTrip$ = this.store.pipe(select(tripsQuery.getSelectedTrip));
   passengersStops$ = this.store.pipe(select(tripsQuery.getAllPassengersStops));
 

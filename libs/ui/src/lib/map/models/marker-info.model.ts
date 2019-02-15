@@ -3,7 +3,7 @@ import { LatLngLiteral } from '@agm/core';
 
 export interface MarkerInfoModel {
 
-  infoContent: string;
+  infoContent?: string;
   point: LatLngLiteral;
 
 }

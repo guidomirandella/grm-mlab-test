@@ -2,10 +2,11 @@
 import { Component, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { AgmMap, MouseEvent, LatLngLiteral } from '@agm/core';
 import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import * as polylineUtils from 'polyline-encoded';
 
 import { PolylinePointModel } from '../models/polyline-point.model';
+import { MarkerInfoModel } from '../models/marker-info.model';
 
 
 @Component({
@@ -16,13 +17,32 @@ export class MapComponent implements OnInit {
 
   @ViewChild(AgmMap) map: AgmMap;
 
+  _fitBounds = false;
   _polylinePoints$: Observable<PolylinePointModel[]>;
   _decodedPolyline$: Observable<LatLngLiteral[]>;
-  _markers$: Observable<LatLngLiteral[]>;
+  _markers$: Observable<MarkerInfoModel[]>;
+
+  get fitBounds(): boolean {
+    return this._fitBounds;
+  }
+
+  set fitBounds(fitBounds: boolean) {
+    this._fitBounds = fitBounds;
+  }
+
+  @Input()
+  set zoom(zoom: number) {
+    this.map.zoom = zoom;
+  }
+
+  get zoom(): number {
+    return this.map.zoom;
+  }
 
   @Input()
   set latitude(latitude: number) {
     this.map.latitude = latitude;
+    this.map.fitBounds = true;
   }
 
   get latitude(): number {
@@ -32,6 +52,7 @@ export class MapComponent implements OnInit {
   @Input()
   set longitude(longitude: number) {
     this.map.longitude = longitude;
+    this.map.fitBounds = true;
   }
 
   get longitude(): number {
@@ -44,7 +65,7 @@ export class MapComponent implements OnInit {
   }
 
   @Input()
-  set markers(markers$: Observable<LatLngLiteral[]>) {
+  set markers(markers$: Observable<MarkerInfoModel[]>) {
     this._markers$ = markers$;
   }
 
@@ -56,6 +77,8 @@ export class MapComponent implements OnInit {
         const polyline: LatLngLiteral[] = [];
 
         decoded.forEach(latlng => polyline.push({ lat: latlng[0], lng: latlng[1] }));
+
+        this.fitBounds = true;
 
         return polyline;
       }),
@@ -69,8 +92,11 @@ export class MapComponent implements OnInit {
 
   constructor() {}
 
+
   ngOnInit() {
 
   }
 
 }
+
+

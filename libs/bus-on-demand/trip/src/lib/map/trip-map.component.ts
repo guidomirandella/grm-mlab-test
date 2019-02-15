@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map, filter } from 'rxjs/operators';
+import { map, filter, tap } from 'rxjs/operators';
 
 import { TripModel } from '../models/trip.model';
 import { MapComponent } from '@mlab/ui';
@@ -21,6 +21,10 @@ export class TripMapComponent {
   set trip(trip$: Observable<TripModel>) {
     this.map.encodedPolyline = trip$.pipe(
       filter(trip => !!trip),
+      tap(trip => {
+        this.map.latitude = trip.stops[0].point._latitude;
+        this.map.longitude = trip.stops[0].point._longitude;
+      }),
       map(trip => trip.route),
     );
   }
@@ -30,7 +34,7 @@ export class TripMapComponent {
     this.map.markers = passengersStops$.pipe(
       filter(passengersStops => !!passengersStops),
       map(passengersStops => passengersStops.map(passengerStop => passengerStop.point)),
-      map(points => points.map(point => ({ lat: point._latitude, lng: point._longitude }))),
+      map(points => points.map(point => ({ point: { lat: point._latitude, lng: point._longitude } }))),
     );
   }
 
